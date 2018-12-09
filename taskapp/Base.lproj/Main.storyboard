@@ -71,10 +71,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="detailTextLabel" destination="0sS-hy-uU3" id="pJF-es-hsG"/>
                         <outlet property="searchBar" destination="Tb9-E5-e1d" id="5gX-rZ-gB6"/>
                         <outlet property="tableView" destination="3pk-67-JDo" id="TiF-8C-HZa"/>
-                        <outlet property="textLabel" destination="9Ve-Ey-nTG" id="ahg-Sb-Tae"/>
                         <segue destination="8iG-ld-Jbj" kind="show" identifier="cellSegue" id="TE3-F0-o3a"/>
                     </connections>
                 </viewController>
@@ -165,7 +163,7 @@
                     <connections>
                         <outlet property="categoryTextField" destination="6BF-BZ-tuS" id="zMe-qR-e7D"/>
                         <outlet property="contentsTextView" destination="OEC-x9-NxE" id="ZBF-1a-KCt"/>
-                        <outlet property="datapicker" destination="gYw-ge-Fyo" id="ei7-Ld-E5I"/>
+                        <outlet property="datepicker" destination="gYw-ge-Fyo" id="8OT-4T-XiR"/>
                         <outlet property="titleTextField" destination="IM9-CK-y2G" id="zM9-fy-dGd"/>
                     </connections>
                 </viewController>

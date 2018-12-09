@@ -1,8 +1,9 @@
 //
 //  Task.swift
-//  
+//  taskapp
 //
-//  Created by AM16J0 on 2018/11/23.
+//  Created by AM16J0 on 2018/12/07.
+//  Copyright © 2018年 masaya inamo. All rights reserved.
 //
 
 import RealmSwift

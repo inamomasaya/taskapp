@@ -13,6 +13,7 @@
 		C405D78C21A42928002D6145 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C405D78A21A42928002D6145 /* Main.storyboard */; };
 		C405D78E21A42929002D6145 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C405D78D21A42929002D6145 /* Assets.xcassets */; };
 		C405D79121A42929002D6145 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C405D78F21A42929002D6145 /* LaunchScreen.storyboard */; };
+		C4CF66AC21BA8ECD00B586A1 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CF66AB21BA8ECC00B586A1 /* Task.swift */; };
 		C4F9E6C421A7F0220044129D /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F9E6C321A7F0220044129D /* InputViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		C405D78D21A42929002D6145 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C405D79021A42929002D6145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C405D79221A4292A002D6145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4CF66AB21BA8ECC00B586A1 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C4F9E6C321A7F0220044129D /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		DA99019D16D90F92615689C3 /* Pods_taskapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_taskapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -87,6 +89,7 @@
 				C405D78F21A42929002D6145 /* LaunchScreen.storyboard */,
 				C405D79221A4292A002D6145 /* Info.plist */,
 				C4F9E6C321A7F0220044129D /* InputViewController.swift */,
+				C4CF66AB21BA8ECC00B586A1 /* Task.swift */,
 			);
 			path = taskapp;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4CF66AC21BA8ECD00B586A1 /* Task.swift in Sources */,
 				C4F9E6C421A7F0220044129D /* InputViewController.swift in Sources */,
 				C405D78921A42928002D6145 /* ViewController.swift in Sources */,
 				C405D78721A42928002D6145 /* AppDelegate.swift in Sources */,
@@ -355,7 +359,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BDVDN9SNKG;
 				INFOPLIST_FILE = taskapp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.masaya.inamo.taskapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -371,7 +378,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BDVDN9SNKG;
 				INFOPLIST_FILE = taskapp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.masaya.inamo.taskapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

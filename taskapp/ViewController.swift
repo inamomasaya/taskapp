@@ -7,15 +7,16 @@
 //
 
 import UIKit
-import RealmSwift   // ←追加
-
+import RealmSwift
+import UserNotifications
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource ,UISearchBarDelegate{
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var detailTextLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    var textLabel : UITableViewCell!
+    var detailTextLabel : UITableViewCell!
     
     // Realmインスタンスを取得する
     let realm = try! Realm()
@@ -24,9 +25,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     // 日付近い順\順でソート：降順
     // 以降内容をアップデートするとリスト内は自動的に更新される。
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: false)
-    
-    var category = try!Realm().objects(Task.self).sorted(beKeyPath:"category",ascending: false)
-    
     
     override func viewDidLoad() {
         
@@ -45,7 +43,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     // MARK: UITableViewDataSourceプロトコルのメソッド
     // データの数（＝セルの数）を返すメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count  // ←追加する
+        return taskArray.count
     }
     
     // 各セルの内容を返すメソッド
@@ -69,7 +67,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     // MARK: UITableViewDelegateプロトコルのメソッド
     // 各セルを選択した時に実行されるメソッド
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "cellSegue",sender: nil) // ←追加する
+        performSegue(withIdentifier: "cellSegue",sender: nil)
     }
     
     // segue で画面遷移するに呼ばれる
@@ -100,32 +98,46 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     // Delete ボタンが押された時に呼ばれるメソッド
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
+            // 削除されたタスクを取得する
+            let task = self.taskArray[indexPath.row]
+            
+            // ローカル通知をキャンセルする
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [String(task.id)])
+            
             // データベースから削除する  // ←以降追加する
             try! realm.write {
                 self.realm.delete(self.taskArray[indexPath.row])
                 tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            // 未通知のローカル通知一覧をログ出力
+            center.getPendingNotificationRequests { (requests: [UNNotificationRequest]) in
+                for request in requests {
+                    print("/---------------")
+                    print(request)
+                    print("---------------/")
+                }
             }
         }
     }
     
     // 検索バーに文字が入力され終わった時の処理
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        let searchtext = searchBar.text
         
+        if searchtext == nil{
+            taskArray = try!Realm().objects(Task.self).sorted(byKeyPath:"date",ascending: false)
+        }else{
+            taskArray = try!Realm().objects(Task.self).filter("category == %@", searchtext!)
+        }
+        tableView.reloadData()
     }
     
     // 検索ボタンが押された時の処理
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         //キーボードをしまう
         searchBar.resignFirstResponder()
-        
-        let searchtext = searchBar.text
-        
-        if searchtext?.isEmpty{
-            category = try!Realm().objects(Task.self).sorted(beKeyPath:"category",ascending: false)
-        }else{
-            category = try!Realm().objects(Task.self).filter()
-        }
-        tableView.reloadData()
     }
     
     // 編集が開始されたら、キャンセルボタンを有効にする
