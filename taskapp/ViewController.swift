@@ -77,7 +77,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         if segue.identifier == "cellSegue" {
             let indexPath = self.tableView.indexPathForSelectedRow
             inputViewController.task = taskArray[indexPath!.row]
-        } else {
+        }
+        else {
             let task = Task()
             task.date = Date()
             
@@ -85,7 +86,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             if allTasks.count != 0 {
                 task.id = allTasks.max(ofProperty: "id")! + 1
             }
-            
             inputViewController.task = task
         }
     }
@@ -126,7 +126,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         let searchtext = searchBar.text
         
-        if searchtext == nil{
+        if searchtext == ""{
             taskArray = try!Realm().objects(Task.self).sorted(byKeyPath:"date",ascending: false)
         }else{
             taskArray = try!Realm().objects(Task.self).filter("category == %@", searchtext!)
@@ -152,6 +152,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         searchBar.resignFirstResponder()
         // サーチバーの中身を空にする
         searchBar.text = ""
+        // 全タスクをrealmの中に保管し直す
+        taskArray = try!Realm().objects(Task.self).sorted(byKeyPath:"date",ascending: false)
         //Table Viewを再表示
         tableView.reloadData()
     }

@@ -19,7 +19,7 @@ class InputViewController: UIViewController {
     @IBOutlet weak var datepicker: UIDatePicker!
     
     let realm = try! Realm()
-    var task: Task!   // 追加する
+    var task: Task!  
     
     override func viewDidLoad() {
         super.viewDidLoad()
